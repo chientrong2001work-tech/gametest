@@ -229,19 +229,53 @@ function makeBoat(x, z) {
   return group;
 }
 
+const MARKER_COLOR = 0x7ce8ff; // bright cyan — reads against both the warm dawn sky and the dark storm sky
 let markerGroup = null;
+let markerGem = null;
+let markerLight = null;
+let markerBaseY = 0;
+
 function setMarker(x, z, h) {
   if (markerGroup) scene.remove(markerGroup);
   markerGroup = new THREE.Group();
-  const gem = new THREE.Mesh(
-    new THREE.OctahedronGeometry(0.35),
-    new THREE.MeshBasicMaterial({ color: 0xd98a4f }),
+
+  const gemHeight = h + 3.2;
+
+  const beam = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.05, 0.12, gemHeight, 8, 1, true),
+    new THREE.MeshBasicMaterial({
+      color: MARKER_COLOR,
+      transparent: true,
+      opacity: 0.35,
+      side: THREE.DoubleSide,
+      depthWrite: false,
+    }),
   );
-  gem.position.y = h + 1.8;
+  beam.position.y = gemHeight / 2;
+  markerGroup.add(beam);
+
+  const ring = new THREE.Mesh(
+    new THREE.RingGeometry(0.7, 0.9, 24),
+    new THREE.MeshBasicMaterial({ color: MARKER_COLOR, transparent: true, opacity: 0.6, side: THREE.DoubleSide }),
+  );
+  ring.rotation.x = -Math.PI / 2;
+  ring.position.y = 0.03;
+  markerGroup.add(ring);
+
+  const gem = new THREE.Mesh(
+    new THREE.OctahedronGeometry(0.6),
+    new THREE.MeshBasicMaterial({ color: MARKER_COLOR }),
+  );
+  gem.position.y = gemHeight;
   markerGroup.add(gem);
-  const light = new THREE.PointLight(0xd98a4f, 1.2, 8);
-  light.position.y = h + 1.8;
+  markerGem = gem;
+
+  const light = new THREE.PointLight(MARKER_COLOR, 2, 14);
+  light.position.y = gemHeight;
   markerGroup.add(light);
+  markerLight = light;
+  markerBaseY = gemHeight;
+
   markerGroup.position.set(x, 0, z);
   scene.add(markerGroup);
 }
@@ -250,6 +284,8 @@ function clearMarker() {
   if (markerGroup) {
     scene.remove(markerGroup);
     markerGroup = null;
+    markerGem = null;
+    markerLight = null;
   }
 }
 
@@ -556,9 +592,11 @@ function updatePrompt() {
   const near = Math.sqrt(dx * dx + dz * dz) <= point.radius;
   interactPrompt.classList.toggle('hidden', !near);
 
-  if (markerGroup) {
-    markerGroup.children[0].rotation.y += 0.02;
-    markerGroup.position.y = Math.sin(performance.now() * 0.002) * 0.3;
+  if (markerGroup && markerGem) {
+    markerGem.rotation.y += 0.03;
+    const bob = Math.sin(performance.now() * 0.002) * 0.3;
+    markerGem.position.y = markerBaseY + bob;
+    markerLight.position.y = markerBaseY + bob;
   }
 }
 
