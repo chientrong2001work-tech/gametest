@@ -3,15 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Test</title>
+  <title>Tỉnh Táo! – Chống Lừa Đảo</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="game-container">
-    <h1>Game Test</h1>
-    <canvas id="gameCanvas" width="480" height="360"></canvas>
-    <p id="score">Score: 0</p>
-    <p class="hint">Dùng phím mũi tên (hoặc WASD) để di chuyển</p>
+  <div id="game">
+    <header>
+      <h1>🚨 Tỉnh Táo! <span class="sub">Bảo vệ Bà khỏi lừa đảo</span></h1>
+      <div id="stats">
+        <span id="money">Tiền tiết kiệm của Bà: 10.000.000đ</span>
+        <span id="level">Cấp: 1</span>
+        <span id="lives">❤️❤️❤️</span>
+      </div>
+    </header>
+
+    <main id="phone">
+      <div id="timer-bar-wrap">
+        <div id="timer-bar"></div>
+      </div>
+
+      <section id="message-card">
+        <div id="channel-icon">📱</div>
+        <div id="message-body">
+          <div id="message-sender">—</div>
+          <div id="message-text">Đang chờ tin nhắn...</div>
+        </div>
+      </section>
+
+      <div id="actions">
+        <button id="scam-btn">🚫 Đây là lừa đảo</button>
+        <button id="safe-btn">✅ Tin này an toàn</button>
+      </div>
+
+      <div id="feedback" class="hidden"></div>
+    </main>
+
+    <div id="start-overlay" class="overlay">
+      <div class="overlay-box">
+        <h2>Điện thoại của Bà đang reo liên tục...</h2>
+        <p>Mỗi ngày bà nhận hàng chục cuộc gọi và tin nhắn. Một số là lừa đảo thật sự, một số chỉ là người thân, ngân hàng, hàng xóm bình thường.</p>
+        <p>Bấm <strong>🚫 Đây là lừa đảo</strong> để chặn kịp, hoặc <strong>✅ Tin này an toàn</strong> nếu tin đáng tin — trước khi hết giờ!</p>
+        <button id="start-btn">Bắt đầu canh điện thoại</button>
+      </div>
+    </div>
+
+    <div id="gameover-overlay" class="overlay hidden">
+      <div class="overlay-box">
+        <h2 id="gameover-title">Bà đã mất hết tiền tiết kiệm!</h2>
+        <p id="final-stats"></p>
+        <div id="recap">
+          <h3>Ghi nhớ dấu hiệu lừa đảo thường gặp:</h3>
+          <ul id="recap-list"></ul>
+        </div>
+        <button id="restart-btn">Chơi lại</button>
+      </div>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
