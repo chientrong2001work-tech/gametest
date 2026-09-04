@@ -1,14 +1,14 @@
-# Tỉnh Táo! – Chống Lừa Đảo
+# Nhìn Gần
 
-Game web đơn giản (HTML5/JS thuần) hướng tới một vấn nạn có thật ở Việt Nam: **lừa đảo qua điện thoại/tin nhắn nhắm vào người lớn tuổi** (giả danh công an, giả ngân hàng, giả người thân cấp cứu, trúng thưởng ảo, đầu tư lãi khủng, vay tiền thu phí trước...).
+Game kể chuyện 2D (HTML5/JS thuần, hình ảnh vẽ hoàn toàn bằng CSS, giọng đọc dùng Web Speech API có sẵn của trình duyệt) lấy tinh thần từ truyện ngắn "Chiếc thuyền ngoài xa" của Nguyễn Minh Châu: sự tương phản giữa vẻ đẹp nhìn từ xa và sự thật khi nhìn gần.
 
-Người chơi vào vai người giúp bà sàng lọc cuộc gọi/tin nhắn: chặn kịp lừa đảo để giữ tiền tiết kiệm của bà, nhưng đừng chặn nhầm tin nhắn thật từ người thân, ngân hàng, hàng xóm.
+Chủ đề: **bạo lực gia đình** — một vấn nạn có thật ở Việt Nam. Đây là câu chuyện gốc, nhân vật và cốt truyện hoàn toàn mới, không sao chép nội dung tác phẩm gốc — chỉ lấy cảm hứng ở cấu trúc "nhìn xa – đẹp, nhìn gần – thật" và sự phức tạp trong lý do nạn nhân không rời đi.
 
-Đây là game độc lập, không liên quan đến cốt truyện hay cách chơi của bất kỳ game nào khác — chỉ lấy cảm hứng ở tinh thần "phản ánh vấn nạn thật tại Việt Nam".
+Người chơi vào vai Lam, cán bộ y tế — xã hội mới về một xóm chài, dần phát hiện sự thật đằng sau một gia đình tưởng chừng êm ấm, và phải lựa chọn cách tiếp cận phù hợp.
 
 ## Chạy thử
 
-Mở trực tiếp file `index.html` bằng trình duyệt, hoặc chạy một server tĩnh:
+Mở trực tiếp file `index.html` bằng trình duyệt (khuyến khích Chrome/Edge để có giọng đọc tiếng Việt tốt nhất), hoặc chạy server tĩnh:
 
 ```bash
 npx serve .
@@ -16,15 +16,13 @@ npx serve .
 
 ## Cách chơi
 
-- Mỗi lượt, một cuộc gọi/tin nhắn xuất hiện kèm thanh thời gian đếm ngược.
-- Bấm **🚫 Đây là lừa đảo** nếu nghi ngờ, hoặc **✅ Tin này an toàn** nếu tin đáng tin.
-- Bỏ lỡ một tin lừa đảo thật (chọn sai hoặc hết giờ) → mất tiền tiết kiệm của bà và mất 1 mạng.
-- Chặn nhầm tin an toàn → không mất tiền nhưng mất chuỗi điểm.
-- Sau mỗi 5 lượt đúng liên tiếp, độ khó tăng (thời gian phản ứng ngắn lại).
-- Hết mạng hoặc hết tiền tiết kiệm → kết thúc game, hiển thị bảng tổng kết kèm các dấu hiệu nhận biết lừa đảo để ghi nhớ.
+- Đọc từng đoạn truyện, bấm vào các lựa chọn để dẫn dắt câu chuyện.
+- Nút 🔊 ở đầu trang bật/tắt giọng đọc tự động (dùng giọng đọc có sẵn của trình duyệt/hệ điều hành, không cần file âm thanh ngoài).
+- Không có yếu tố thắng/thua hay tính điểm — các lựa chọn dẫn đến những kết cục khác nhau, phản ánh sự phức tạp thực tế của vấn đề.
+- Cuối truyện có thông tin đường dây nóng hỗ trợ thật dành cho người đang gặp bạo lực gia đình.
 
 ## Cấu trúc
 
-- `index.html` — khung giao diện: thẻ tin nhắn, thanh thời gian, nút hành động, overlay bắt đầu/kết thúc
-- `style.css` — giao diện tối giản kiểu ứng dụng điện thoại
-- `script.js` — logic game: ngân hàng tình huống thật, vòng lặp lượt chơi, tính điểm/mạng/độ khó, bảng tổng kết
+- `index.html` — khung giao diện: sân khấu cảnh, khối thoại, lựa chọn, footer đường dây nóng
+- `style.css` — toàn bộ hình ảnh nền (biển sương sớm, xóm chài, phòng khám, đêm bão...) vẽ bằng CSS gradient/shape, không dùng ảnh ngoài
+- `script.js` — engine kể chuyện dạng cây cảnh (scene graph) với nhánh lựa chọn, cờ trạng thái ảnh hưởng đoạn kết, tích hợp giọng đọc qua `speechSynthesis`
