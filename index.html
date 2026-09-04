@@ -8,31 +8,58 @@
 </head>
 <body>
   <div id="game">
-    <header>
+    <canvas id="scene-canvas"></canvas>
+
+    <div id="crosshair"></div>
+
+    <div id="hud-top">
       <h1>Nhìn Gần</h1>
-      <p class="sub">một câu chuyện về những gì ẩn sau vẻ ngoài yên bình</p>
       <button id="voice-toggle">🔊 Giọng đọc: Bật</button>
-    </header>
+    </div>
 
-    <main id="stage">
-      <div id="scene-bg"></div>
-      <div id="scene-overlay"></div>
-      <div id="scene-content">
-        <div id="speaker"></div>
-        <div id="story-text"></div>
-        <div id="choices"></div>
+    <div id="interact-prompt" class="hidden">Nhấn <kbd>E</kbd> để lại gần</div>
+
+    <div id="subtitle-box" class="hidden">
+      <div id="subtitle-speaker"></div>
+      <div id="subtitle-text"></div>
+      <button id="subtitle-continue">Tiếp tục ▸</button>
+    </div>
+
+    <div id="choice-overlay" class="hidden">
+      <div class="choice-box">
+        <div id="choice-text"></div>
+        <div id="choice-buttons"></div>
       </div>
-    </main>
+    </div>
 
-    <footer id="hotline-footer" class="hidden">
-      <h3>Nếu bạn hoặc ai đó bạn biết đang gặp tình huống tương tự:</h3>
-      <ul>
-        <li><strong>Tổng đài quốc gia bảo vệ trẻ em: 111</strong> — miễn phí, hoạt động 24/7</li>
-        <li><strong>Ngôi nhà Bình yên (Hội LHPN Việt Nam): 1900 969 680</strong> — hỗ trợ phụ nữ và trẻ em bị bạo lực</li>
-      </ul>
-      <p class="disclaimer">Thông tin đường dây nóng mang tính tham khảo tại thời điểm viết, có thể thay đổi — vui lòng tra cứu xác nhận lại khi cần liên hệ.</p>
-    </footer>
+    <div id="start-overlay" class="overlay">
+      <div class="overlay-box">
+        <h2>Nhìn Gần</h2>
+        <p class="sub">một câu chuyện về những gì ẩn sau vẻ ngoài yên bình</p>
+        <p>Dùng <strong>WASD</strong> để di chuyển, <strong>chuột</strong> để nhìn quanh, <strong>E</strong> để tương tác khi thấy gợi ý.</p>
+        <p>Đi theo con đường trong làng chài, đến gần từng điểm được đánh dấu để câu chuyện tiếp diễn.</p>
+        <button id="start-btn">Bước vào làng</button>
+      </div>
+    </div>
+
+    <div id="gameover-overlay" class="overlay hidden">
+      <div class="overlay-box">
+        <h2 id="gameover-title">Hết</h2>
+        <div id="gameover-text"></div>
+        <div id="hotline-footer">
+          <h3>Nếu bạn hoặc ai đó bạn biết đang gặp tình huống tương tự:</h3>
+          <ul>
+            <li><strong>Tổng đài quốc gia bảo vệ trẻ em: 111</strong> — miễn phí, 24/7</li>
+            <li><strong>Ngôi nhà Bình yên (Hội LHPN Việt Nam): 1900 969 680</strong></li>
+          </ul>
+          <p class="disclaimer">Thông tin mang tính tham khảo, có thể thay đổi — vui lòng tra cứu xác nhận lại khi cần.</p>
+        </div>
+        <button id="restart-btn">Chơi lại</button>
+      </div>
+    </div>
   </div>
+
+  <script src="vendor/three.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
